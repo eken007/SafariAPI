@@ -30,6 +30,6 @@ class ConfirmeMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Test mail From Surfside Media')->view('email.confirmeMail');
+        return $this->subject('Email de vérification')->view('email.confirmeMail');
     }
 }

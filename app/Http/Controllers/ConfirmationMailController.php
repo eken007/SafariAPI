@@ -10,8 +10,8 @@ class ConfirmationMailController extends Controller
 {
     public function sendEmail(){
         $details = [
-            'title' => 'Mail from media',
-            'body' => 'this is for testing mail using mail'
+            'title' => 'Votre code de vérification pour finaliser votre inscription est le :',
+            'body' => '656431'
         ];
 
         Mail::to("ekenfranky@gmail.com")->send(new ConfirmeMail($details));
