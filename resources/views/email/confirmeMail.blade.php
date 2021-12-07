@@ -44,7 +44,7 @@
             <h1>{{ $details['body'] }}</h1>
         </div>
         <div class="footers">
-            <p class="footer">veuillez à ne pas répondre à ce courrier électronique</p>
+            <p class="footer">veuillez ne pas répondre à ce courrier électronique</p>
             <p class="footer">CODEX Sarl</p>
             <p class="footer">Bilongue -> Douala -> Cameroun</p>
         </div>

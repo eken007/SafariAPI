@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\Mail;
 
 class ConfirmationMailController extends Controller
 {
-    public function sendEmail(){
+    public function sendEmail($code, $email){
         $details = [
             'title' => 'Votre code de vérification pour finaliser votre inscription est le :',
-            'body' => '656431'
+            'body' => $code
         ];
 
-        Mail::to("ekenfranky@gmail.com")->send(new ConfirmeMail($details));
+        Mail::to($email)->send(new ConfirmeMail($details));
 
         $response = ["message" => "Mail send"];
         return response($response, 200);
