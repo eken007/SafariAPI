@@ -19,7 +19,8 @@ class SerieController extends Controller
      */
     public function index()
     {
-        //
+        $serie = Video::where('rubrique', 'serie')->orderBy('created_at','DESC')->take(20)->get();
+        return response()->json($serie);
     }
 
     /**
@@ -49,6 +50,7 @@ class SerieController extends Controller
         $serie->date_de_sortie = $request->date_de_sortie;
         $serie->description = $request->description;
         $serie->age = $request->age;
+        $serie->baniere = false;
 
 
         if ($request->hasfile('image')) {
@@ -78,15 +80,14 @@ class SerieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function saveacteur(Request $request)
+    public function saveacteur(Request $request, $id)
     {
-        $last = Video::select('id')->where('rubrique','serie')->latest('id')->first();
 
         $acteur = new Acteur();
 
         $acteur->nom = $request->nom;
 
-        $acteur->film_id = $last->id;
+        $acteur->film_id = $id;
 
         if ($request->hasfile('photo')) {
             $file = $request->file('photo');
@@ -101,15 +102,14 @@ class SerieController extends Controller
         return response()->json($acteur);
     }
 
-    public function savegenre(Request $request)
+    public function savegenre(Request $request, $id)
     {
-        $last = Video::select('id')->where('rubrique','serie')->latest('id')->first();
 
         $genre = new Genre();
 
         $genre->nom = $request->nom;
 
-        $genre->film_id = $last->id;
+        $genre->film_id = $id;
 
 
         $genre->save();

@@ -15,11 +15,12 @@ class Video extends Model
         'rubrique',
         'date_de_sortie',
         'duree',
-        'Qualite',
+        'qualite',
         'description',
         'age',
         'video',
         'image',
-        'pub'
+        'pub',
+        'banniere'
     ];
 }

@@ -17,8 +17,11 @@ class FilmsController extends Controller
      */
     public function index()
     {
-        $response = ['message' => 'article index'];
-        return response($response, 200);
+
+        $film = Video::where('rubrique', 'film')->orderBy('created_at','DESC')->take(20)->get();
+        return response()->json($film);
+        //$response = ['message' => 'article index'];
+        //return response($response, 200);
 
     }
 
@@ -51,6 +54,7 @@ class FilmsController extends Controller
         $film->qualite = $request->qualite;
         $film->description = $request->description;
         $film->age = $request->age;
+        $film->banniere = false;
 
         if ($request->hasfile('video')) {
             $file = $request->file('video');
@@ -88,15 +92,14 @@ class FilmsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function saveacteur(Request $request)
+    public function saveacteur(Request $request, $id)
     {
-        $last = Video::select('id')->where('rubrique','film')->latest('id')->first();
 
         $acteur = new Acteur();
 
         $acteur->nom = $request->nom;
 
-        $acteur->film_id = $last->id;
+        $acteur->film_id = $id;
 
         if ($request->hasfile('photo')) {
             $file = $request->file('photo');
@@ -111,15 +114,14 @@ class FilmsController extends Controller
         return response()->json($acteur);
     }
 
-    public function savegenre(Request $request)
+    public function savegenre(Request $request, $id)
     {
-        $last = Video::select('id')->where('rubrique','film')->latest('id')->first();
 
         $genre = new Genre();
 
         $genre->nom = $request->nom;
 
-        $genre->film_id = $last->id;
+        $genre->film_id = $id;
 
         $genre->save();
 
