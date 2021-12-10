@@ -46,12 +46,26 @@ class AllRubriquesController extends Controller
     }
 
     public function detailpage($id){
-        
+
+            //la video
         $video = Video::where('id', $id )->get();
-        $acteurs = Acteur::where('film_id', $id )->get();
-        $genres = Genre::where('film_id', $id )->get();
+
+            //les cateurs de la video
+        $acteurs = Acteur::where('film_id', $id )->take(10)->get();
+
+            //les genres de la video
+        $genres = Genre::where('film_id', $id )->take(3)->get();
+
+            //ses saisons video
         $saisons = Saison::where('film_id', $id )->get();
-        return response()->json([$video, $acteurs,$genres, $saisons]);
+
+            // les films ou series similaires 
+        $genre = Genre::where('film_id', $id )->first();
+        $similaire = Video::select('videos.*','videos.id','videos.titre')->where('videos.id','!=', $id)->take(20)
+            ->join('genres as a', 'videos.id', '=', 'a.film_id')->where('a.nom', '=', $genre->nom)
+            ->get();
+
+        return response()->json([$video, $acteurs,$genres, $saisons, $similaire]);
     }
 
     public function episodes($id){

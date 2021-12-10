@@ -17,12 +17,21 @@ class FilmsController extends Controller
      */
     public function index()
     {
-
-        $film = Video::where('rubrique', 'film')->orderBy('created_at','DESC')->take(20)->get();
-        return response()->json($film);
+        if(request('mot') == null){
+            return $this->refresh();
+        } else{
+            $films = Video::where('rubrique', 'film')->where('titre','like', '%'.request('mot').'%')->orderBy('created_at','DESC')->get();
+            return response()->json($films);
+        }
+        
         //$response = ['message' => 'article index'];
         //return response($response, 200);
 
+    }
+
+    private function refresh(){
+        $films = Video::where('rubrique', 'film')->orderBy('created_at','DESC')->take(20)->get();
+        return response()->json($films);
     }
 
     /**
@@ -161,4 +170,5 @@ class FilmsController extends Controller
     {
         //
     }
+
 }
