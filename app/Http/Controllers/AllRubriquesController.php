@@ -17,13 +17,8 @@ class AllRubriquesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function search()
-    {
-        if(request('mot') == null){
+    {                                
             return $this->refresh();
-        } else{
-            $videos = Video::where('titre','like', '%'.request('mot').'%')->orderBy('created_at','DESC')->get();
-            return response()->json($videos);
-        }
     }
 
     private function refresh(){

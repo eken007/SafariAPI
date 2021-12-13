@@ -19,17 +19,12 @@ class SerieController extends Controller
      */
     public function index()
     {
-        
-        if(request('mot') == null){
-            return $this->refresh();
-        } else{
-            $series = Video::where('rubrique', 'serie')->where('titre','like', '%'.request('mot').'%')->orderBy('created_at','DESC')->get();
-            return response()->json($series);
-        }
+        $series = Video::where('rubrique', 'serie')->orderBy('created_at','DESC')->take(20)->get();
+        return response()->json($series);
     }
 
-    private function refresh(){
-        $series = Video::where('rubrique', 'serie')->orderBy('created_at','DESC')->take(20)->get();
+    public function allSeries(){
+        $series = Video::where('rubrique', 'serie')->orderBy('created_at','DESC')->get();
         return response()->json($series);
     }
 

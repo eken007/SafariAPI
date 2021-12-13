@@ -8,7 +8,7 @@
     <style>
         .head{
             width: 100%;
-            height: auto;
+            height: 20%;
         }
         .body{
             width: 100%;
@@ -36,7 +36,7 @@
     <div>
         <div class="head">
             <div class="logo">
-                <img  src="{{ $message->embed(public_path() . '/images/safari.png') }}" />
+                <img  src="{{ $message->embed(public_path() . '/logos/emaillogosafari.png') }}" />
             </div>
         </div>
         <div class="body">
