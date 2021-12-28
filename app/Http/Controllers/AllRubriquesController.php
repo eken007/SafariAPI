@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Acteur;
+use App\Models\User;
 use App\Models\Episode;
 use App\Models\Genre;
 use App\Models\Saison;
@@ -18,7 +19,7 @@ class AllRubriquesController extends Controller
      */
     public function search()
     {                                
-            return $this->refresh();
+        return $this->refresh();
     }
 
     private function refresh(){
@@ -27,10 +28,17 @@ class AllRubriquesController extends Controller
     }
 
     public function activepublicite(Video $video){
-        $video->banniere = true;
+        
+        if( $video->banniere == false) {
 
-        $video->update();
+            $video->banniere = true;
+            $video->update();
+        } else {
+            $video->banniere = false;
+            $video->update();
+        }
 
+        
         return response()->json($video);
     }
 
@@ -56,9 +64,14 @@ class AllRubriquesController extends Controller
 
             // les films ou series similaires 
         $genre = Genre::where('film_id', $id )->first();
-        $similaire = Video::select('videos.*','videos.id','videos.titre')->where('videos.id','!=', $id)->take(20)
+        if($genre){
+            $similaire = Video::select('videos.*','videos.id','videos.titre')->where('videos.id','!=', $id)->take(20)
             ->join('genres as a', 'videos.id', '=', 'a.film_id')->where('a.nom', '=', $genre->nom)
             ->get();
+        } else {
+            $similaire = [];
+        }
+        
 
         return response()->json([$video, $acteurs,$genres, $saisons, $similaire]);
     }
@@ -67,6 +80,28 @@ class AllRubriquesController extends Controller
         
         $episodes = Episode::where('saison_id', $id )->get();
         return response()->json($episodes);
+    }
+
+    public function statistique(){
+
+        //films
+        $films = Video::select('*')->where('rubrique', 'film')->get();
+
+        //series
+        $series = Video::select('*')->where('rubrique', 'serie')->get();
+    
+        //webseries
+        $webseries = Video::select('*')->where('rubrique', 'web series')->get();
+    
+        //novelas
+        $novelas = Video::select('*')->where('rubrique', 'novelas')->get();
+
+        //users
+
+        $users = User::all();
+        
+
+        return response()->json([$films, $series, $users]);
     }
 
 }

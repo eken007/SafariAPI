@@ -13,9 +13,16 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+
 Route::post('/register', [\App\Http\Controllers\Api\PassportController::class, 'register']);
 Route::post('/login', [\App\Http\Controllers\Api\PassportController::class, 'login']);
-Route::post('/send-email/{code}/{email}', [\App\Http\Controllers\ConfirmationMailController::class, 'sendEmail']);
+Route::post('/send-email', [\App\Http\Controllers\ConfirmationMailController::class, 'sendEmail']);
+Route::post('/send-email-password', [\App\Http\Controllers\ResetPasswordMailController::class, 'sendEmail']);
+Route::put('/resetpassword/{id}', [\App\Http\Controllers\Api\PassportController::class, 'resetpassword']);
+
+
+
 
 
 Route::middleware('auth:api')->group(function () {
@@ -23,16 +30,22 @@ Route::middleware('auth:api')->group(function () {
 
     // route des films
 
-    Route::get('/films', [\App\Http\Controllers\FilmsController::class, 'index'])->middleware('api.admin');
-    Route::get('/allfilms', [\App\Http\Controllers\FilmsController::class, 'allFilms'])->middleware('api.admin');
+    Route::get('/films', [\App\Http\Controllers\FilmsController::class, 'index']);
+    Route::get('/searchfilms/{titre}', [\App\Http\Controllers\FilmsController::class, 'search']);
+    Route::get('/allfilms', [\App\Http\Controllers\FilmsController::class, 'allFilms']);
     Route::post('/savefilm', [\App\Http\Controllers\FilmsController::class, 'store'])->middleware('api.admin');
-    Route::post('/saveacteurfilm/{id}', [\App\Http\Controllers\FilmsController::class, 'saveacteur'])->middleware('api.admin');
-    Route::post('/savegenrefilm/{id}', [\App\Http\Controllers\FilmsController::class, 'savegenre'])->middleware('api.admin');
+    Route::post('/saveacteurfilm', [\App\Http\Controllers\FilmsController::class, 'saveacteur'])->middleware('api.admin');
+    Route::delete('/deleteacteurfilm/{id}', [\App\Http\Controllers\FilmsController::class, 'deleteacteur'])->middleware('api.admin');
+    Route::post('/savegenrefilm', [\App\Http\Controllers\FilmsController::class, 'savegenre'])->middleware('api.admin');
+    Route::delete('/deletegenrefilm/{id}', [\App\Http\Controllers\FilmsController::class, 'deletegenre'])->middleware('api.admin');
+    Route::get('/searchfilms/{titre?}', [\App\Http\Controllers\FilmsController::class, 'search']);
+    Route::delete('/deletefilm/{id}', [\App\Http\Controllers\FilmsController::class, 'deletefilm'])->middleware('api.admin');
+    Route::put('/activepublicite/{video}', [\App\Http\Controllers\AllRubriquesController::class, 'activepublicite'])->middleware('api.admin');
 
     // route des series
 
-    Route::get('/series', [\App\Http\Controllers\SerieController::class, 'index'])->middleware('api.admin');
-    Route::get('/allseries', [\App\Http\Controllers\SerieController::class, 'allSeries'])->middleware('api.admin');
+    Route::get('/series', [\App\Http\Controllers\SerieController::class, 'index']);
+    Route::get('/allseries', [\App\Http\Controllers\SerieController::class, 'allSeries']);
     Route::post('/saveserie', [\App\Http\Controllers\SerieController::class, 'store'])->middleware('api.admin');
     Route::post('/saveacteurserie/{id}', [\App\Http\Controllers\SerieController::class, 'saveacteur'])->middleware('api.admin');
     Route::post('/savegenreserie/{id}', [\App\Http\Controllers\SerieController::class, 'savegenre'])->middleware('api.admin');
@@ -43,9 +56,13 @@ Route::middleware('auth:api')->group(function () {
     // routes concernant toutes les rubriques
 
     Route::get('/search', [\App\Http\Controllers\AllRubriquesController::class, 'search']);
-    Route::put('/activepublicite/{video}', [\App\Http\Controllers\AllRubriquesController::class, 'activepublicite']);
+    
     Route::get('/publicite', [\App\Http\Controllers\AllRubriquesController::class, 'publicite']);
     Route::get('/detailpage/{id}', [\App\Http\Controllers\AllRubriquesController::class, 'detailpage']);
     Route::get('/episodes/{id}', [\App\Http\Controllers\AllRubriquesController::class, 'episodes']);
     Route::get('/similaire/{id}', [\App\Http\Controllers\AllRubriquesController::class, 'similaire']);
+    Route::get('/statistique', [\App\Http\Controllers\AllRubriquesController::class, 'statistique'])->middleware('api.admin');
+    Route::delete('/deleteuser/{id}', [\App\Http\Controllers\Api\PassportController::class, 'destroy'])->middleware('api.admin');
+    Route::put('/edituser', [\App\Http\Controllers\Api\PassportController::class, 'edit'])->middleware('api.admin');
+    
 });

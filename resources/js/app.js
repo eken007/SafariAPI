@@ -8,25 +8,103 @@ require('./bootstrap');
 
 window.Vue = require('vue').default;
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+
+import Login from './components/LoginComponent.vue';
+import Accueil from './components/AccueilComponent.vue';
+import Dashboard from './components/DashboardComponent.vue';
+import Film from './components/film/FilmComponent.vue';
+import DetailFilm from './components/film/DetailFilmComponent.vue';
+import Serie from './components/serie/SerieComponent.vue';
+import WebSerie from './components/webserie/WebSerieComponent.vue';
+import Novelas from './components/novelas/NovelasComponent.vue';
+import EmailVerifie from './components/EmailVerifieComponent.vue';
+import ConfirmeCode from './components/ConfirmeCodeComponent.vue';
+import ResetPassword from './components/ResetPasswordComponent.vue';
+
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+const routes = [
+    {
+        path: '/',
+        component: Login
+    },
+    {
+        path: '/emailverifie',
+        component: EmailVerifie
+    },
+    {
+        path: '/confirmecode',
+        name: 'confirmecode',
+        component: ConfirmeCode,
+    },
+    {
+        path: '/resetpassword',
+        name: 'resetpassword',
+        component: ResetPassword,
+    },
+    {
+        path: '/accueil',
+        component: Accueil,
+        children: [
+            {
+                path: '/',
+                components: {
+                    default: Accueil,
+                    two: Dashboard,
+                  } 
+            }, 
+            {
+                path: '/films',
+                components: {
+                    default: Accueil,
+                    two: Film,
+                  } 
+            },
+            {
+                path: '/detailfilm/:film',
+                name:'detailfilm',
+                components: {
+                    default: Accueil,
+                    two: DetailFilm,
+                  },
+                  props: {
+                    default: true,
+                    two: true
+                }, 
+            },  
+            {
+                path: '/series',
+                components: {
+                    default: Accueil,
+                    two: Serie,
+                  } 
+            }, 
+            {
+                path: '/webseries',
+                components: {
+                    default: Accueil,
+                    two: WebSerie,
+                  } 
+            },
+            {
+                path: '/novelas',
+                components: {
+                    default: Accueil,
+                    two: Novelas,
+                  } 
+            },  
+        ]
+    },
+   
+]
+
+const router = new VueRouter({routes});
 
 const app = new Vue({
     el: '#app',
+    router: router,
 });

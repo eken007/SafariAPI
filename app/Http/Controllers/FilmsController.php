@@ -87,7 +87,9 @@ class FilmsController extends Controller
 
         $film->save();
 
-        return response()->json($film);
+        $films = Video::where('rubrique','film');
+
+        return response()->json($films);
 
     }
 
@@ -97,14 +99,14 @@ class FilmsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function saveacteur(Request $request, $id)
+    public function saveacteur(Request $request)
     {
 
         $acteur = new Acteur();
 
         $acteur->nom = $request->nom;
 
-        $acteur->film_id = $id;
+        $acteur->film_id = $request->id;
 
         if ($request->hasfile('photo')) {
             $file = $request->file('photo');
@@ -116,21 +118,45 @@ class FilmsController extends Controller
 
         $acteur->save();
 
-        return response()->json($acteur);
+        $acteurs = Acteur::select('*')->where('film_id', $request->id)->get();
+
+        return response()->json($acteurs);
     }
 
-    public function savegenre(Request $request, $id)
+    public function deleteacteur($id)
+    {
+        $film = Acteur::find($id);
+        $acteur = Acteur::find($id);
+        $acteur->delete();
+
+        $acteurs = Acteur::where('film_id', $film->film_id)->get();
+        return response()->json($acteurs);
+    }
+
+    public function savegenre(Request $request)
     {
 
         $genre = new Genre();
 
         $genre->nom = $request->nom;
 
-        $genre->film_id = $id;
+        $genre->film_id = $request->id;
 
         $genre->save();
 
-        return response()->json($genre);
+        $genres = Genre::select('*')->where('film_id', $request->id)->get();
+
+        return response()->json($genres);
+    }
+
+    public function deletegenre($id)
+    {
+        $film = Genre::find($id);
+        $genre = Genre::find($id);
+        $genre->delete();
+
+        $genres = Genre::where('film_id', $film->film_id)->get();
+        return response()->json($genres);
     }
 
     /**
@@ -162,9 +188,38 @@ class FilmsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deletefilm($id)
     {
-        //
+        $film = Video::find($id);
+        $film->delete();
+
+        $genres = Genre::where('film_id', $id)->get();
+        foreach($genres as $genre){
+            $genre->delete();
+        }
+
+        $acteurs = Acteur::where('film_id', $id)->get();
+        foreach($acteurs as $acteur){
+            $acteur->delete();
+        }
+
+        $films = Video::where('rubrique','film');
+        return response()->json($films);
+    }
+
+    public function search()
+    {                                
+        if(request('titre') == null){
+            return $this->refresh();
+        } else{
+            $films = Video::where('titre','like', '%'.request('titre').'%')->where('rubrique', 'film')->orderBy('created_at','DESC')->get();
+            return response()->json($films);
+        }
+    }
+
+    private function refresh(){
+        $videos = Video::orderBy('created_at','DESC')->where('rubrique', 'film')->get();
+        return response()->json($videos);
     }
 
 }

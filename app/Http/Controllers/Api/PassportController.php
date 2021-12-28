@@ -33,6 +33,21 @@ class PassportController extends Controller
         return response(['user'=>$user, 'access_token'=> $response]);
     }
 
+    public function resetpassword(Request $request, $id) {
+        $validator = Validator::make($request->all(), [
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+        if ($validator->fails())
+        {
+            return response(['errors'=>$validator->errors()->all()], 422);
+        }
+
+        $user = User::find($id);
+        $user->password = Hash::make(request('password'));
+        $user->update();
+        return response(['user'=>$user]);
+    }
+
     public function login (Request $request) {
         $validator = Validator::make($request->all(), [
             'email' => 'required|string|email|max:255',
@@ -64,5 +79,33 @@ class PassportController extends Controller
         }
         $response = ['message' => 'You have been successfully logged out!'];
         return response($response, 200);
+    }
+
+    public function destroy ($id) {
+        $user = User::find($id);
+        $user->tokens()->delete();
+        $user->delete();
+        $users = User::all();
+        if($user){ 
+            return response()->json($users);
+        }
+    }
+
+    public function edit (Request $request) {
+        $user = User::find($request->idEdit);
+        if($request->statut == 'Utilisateur'){
+            $user->type= 0;
+        }
+        if($request->statut == 'Createur'){
+            $user->type= 1;
+        }
+        if($request->statut == 'Admin'){
+            $user->type= 2;
+        }
+
+        $user->save();
+
+        $users = User::all();
+        return response()->json($users);
     }
 }
