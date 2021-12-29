@@ -25,6 +25,7 @@ Route::put('/resetpassword/{id}', [\App\Http\Controllers\Api\PassportController:
 
 
 
+
 Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [\App\Http\Controllers\Api\PassportController::class, 'logout']);
 
@@ -47,11 +48,16 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/series', [\App\Http\Controllers\SerieController::class, 'index']);
     Route::get('/allseries', [\App\Http\Controllers\SerieController::class, 'allSeries']);
     Route::post('/saveserie', [\App\Http\Controllers\SerieController::class, 'store'])->middleware('api.admin');
-    Route::post('/saveacteurserie/{id}', [\App\Http\Controllers\SerieController::class, 'saveacteur'])->middleware('api.admin');
-    Route::post('/savegenreserie/{id}', [\App\Http\Controllers\SerieController::class, 'savegenre'])->middleware('api.admin');
-    Route::post('/savesaisonserie/{id}', [\App\Http\Controllers\SerieController::class, 'savesaison'])->middleware('api.admin');
-    Route::post('/saveepisodeserie/{id}', [\App\Http\Controllers\SerieController::class, 'saveepisode'])->middleware('api.admin');
-
+    Route::post('/saveacteurserie', [\App\Http\Controllers\SerieController::class, 'saveacteur'])->middleware('api.admin');
+    Route::post('/savegenreserie', [\App\Http\Controllers\SerieController::class, 'savegenre'])->middleware('api.admin');
+    Route::post('/savesaisonserie', [\App\Http\Controllers\SerieController::class, 'savesaison'])->middleware('api.admin');
+    Route::delete('/deletesaisonserie/{id}', [\App\Http\Controllers\SerieController::class, 'deletesaison'])->middleware('api.admin');
+    Route::post('/saveepisodeserie', [\App\Http\Controllers\SerieController::class, 'saveepisode'])->middleware('api.admin');
+    Route::get('/searchserie/{titre?}', [\App\Http\Controllers\SerieController::class, 'search']);
+    Route::delete('/deleteserie/{id}', [\App\Http\Controllers\SerieController::class, 'deleteserie'])->middleware('api.admin');
+    Route::delete('/deletegenreserie/{id}', [\App\Http\Controllers\SerieController::class, 'deletegenre'])->middleware('api.admin');
+    Route::delete('/deleteacteurserie/{id}', [\App\Http\Controllers\SerieController::class, 'deleteacteur'])->middleware('api.admin');
+    Route::delete('/deleteepisodeserie/{id}', [\App\Http\Controllers\SerieController::class, 'deleteepisode'])->middleware('api.admin');
 
     // routes concernant toutes les rubriques
 
@@ -64,5 +70,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/statistique', [\App\Http\Controllers\AllRubriquesController::class, 'statistique'])->middleware('api.admin');
     Route::delete('/deleteuser/{id}', [\App\Http\Controllers\Api\PassportController::class, 'destroy'])->middleware('api.admin');
     Route::put('/edituser', [\App\Http\Controllers\Api\PassportController::class, 'edit'])->middleware('api.admin');
+    Route::get('/allepisodes/{id}', [\App\Http\Controllers\AllRubriquesController::class, 'allepisodes']);
+    
     
 });

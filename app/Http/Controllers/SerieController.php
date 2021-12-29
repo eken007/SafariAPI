@@ -9,6 +9,7 @@ use App\Models\Saison;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SerieController extends Controller
 {
@@ -25,6 +26,21 @@ class SerieController extends Controller
 
     public function allSeries(){
         $series = Video::where('rubrique', 'serie')->orderBy('created_at','DESC')->get();
+        return response()->json($series);
+    }
+
+    public function search()
+    {                                
+        if(request('titre') == null){
+            return $this->refresh();
+        } else{
+            $series = Video::where('titre','like', '%'.request('titre').'%')->where('rubrique', 'serie')->orderBy('created_at','DESC')->get();
+            return response()->json($series);
+        }
+    }
+
+    private function refresh(){
+        $series = Video::orderBy('created_at','DESC')->where('rubrique', 'serie')->get();
         return response()->json($series);
     }
 
@@ -55,7 +71,7 @@ class SerieController extends Controller
         $serie->date_de_sortie = $request->date_de_sortie;
         $serie->description = $request->description;
         $serie->age = $request->age;
-        $serie->baniere = false;
+        $serie->banniere = false;
 
 
         if ($request->hasfile('image')) {
@@ -76,7 +92,9 @@ class SerieController extends Controller
 
         $serie->save();
 
-        return response()->json($serie);
+        $series = Video::select('*')->where('rubrique','serie')->get();
+
+        return response()->json($series);
     }
 
     /**
@@ -85,14 +103,14 @@ class SerieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function saveacteur(Request $request, $id)
+    public function saveacteur(Request $request)
     {
 
         $acteur = new Acteur();
 
         $acteur->nom = $request->nom;
 
-        $acteur->film_id = $id;
+        $acteur->film_id = $request->id;
 
         if ($request->hasfile('photo')) {
             $file = $request->file('photo');
@@ -104,64 +122,128 @@ class SerieController extends Controller
 
         $acteur->save();
 
-        return response()->json($acteur);
+        $acteurs = Acteur::select('*')->where('film_id', $request->id)->get();
+
+        return response()->json($acteurs);
+    }
+    
+    public function deleteacteur($id)
+    {
+        $serie = Acteur::find($id);
+        $acteur = Acteur::find($id);
+        $acteur->delete();
+
+        $acteurs = Acteur::where('film_id', $serie->film_id)->get();
+        return response()->json($acteurs);
     }
 
-    public function savegenre(Request $request, $id)
+    public function savegenre(Request $request)
     {
 
         $genre = new Genre();
 
         $genre->nom = $request->nom;
 
-        $genre->film_id = $id;
+        $genre->film_id = $request->id;
 
 
         $genre->save();
 
-        return response()->json($genre);
+        $genres = Genre::where('film_id', $request->id)->get();
+
+        return response()->json($genres);
     }
 
-    public function savesaison(Request $request, $id)
+    public function deletegenre($id)
     {
+        $serie = Genre::find($id);
+        $genre = Genre::find($id);
+        $genre->delete();
 
-        $saison = new Saison();
-
-        $saison->nom = $request->nom;
-
-        $saison->film_id = $id;
-
-        $saison->save();
-
-        return response()->json($saison);
+        $genres = Genre::where('film_id', $serie->film_id)->get();
+        return response()->json($genres);
     }
 
-    public function saveepisode(Request $request, $id)
+    public function savesaison(Request $request)
     {
+        if(DB::table('saisons')->where('nom', $request->nom)->where('film_id', $request->id)->exists()){
+            $response = ["message" => "Saison exist"];
+            return response($response, 422);
+        } else {
+            $saison = new Saison();
 
-        $episode = new Episode();
+            $saison->nom = $request->nom;
 
-        $episode->nom = $request->nom;
+            $saison->film_id = $request->id;
 
-        $episode->saison_id = $id;
+            $saison->save();
 
-        $episode->titre = $request->titre;
+            $saisons = Saison::where('film_id', $request->id)->orderBy('nom','ASC')->get();
 
-        $episode->qualite = $request->qualite;
+            return response()->json($saisons);
+        }
+        
+    }
 
-        $episode->duree = $request->duree;
+    public function deletesaison($id)
+    {
+        $serie = Saison::find($id);
+        $saison = Saison::find($id);
+        $saison->delete();
 
-        if ($request->hasfile('video')) {
-            $file = $request->file('video');
-            $extension = $file->getClientOriginalExtension();
-            $newfilename = time().'.'.$extension;
-            $file->move(public_path('episodes'),$newfilename);
-            $episode->video = $newfilename;
+        $episodes = Episode::where('saison_id', $id)->get();
+        foreach($episodes as $episode){
+            $episode->delete();
         }
 
-        $episode->save();
+        $saisons = Saison::where('film_id', $serie->film_id)->orderBy('nom','ASC')->get();
+        return response()->json($saisons);
+    }
 
-        return response()->json($episode);
+    public function saveepisode(Request $request)
+    {
+        if(DB::table('episodes')->where('nom', $request->nom)->where('saison_id', $request->saison_id)->exists()){
+            $response = ["message" => "Episode exist"];
+            return response($response, 422);
+        } else {
+
+            $episode = new Episode();
+
+            $episode->nom = $request->nom;
+
+            $episode->saison_id = $request->saison_id;
+
+            $episode->titre = $request->titre;
+
+            $episode->qualite = $request->qualite;
+
+            $episode->duree = $request->duree;
+
+            if ($request->hasfile('video')) {
+                $file = $request->file('video');
+                $extension = $file->getClientOriginalExtension();
+                $newfilename = time().'.'.$extension;
+                $file->move(public_path('episodes'),$newfilename);
+                $episode->video = $newfilename;
+            }
+
+            $episode->save();
+
+            $episodes = Episode::where('saison_id', $request->saison_id)->orderBy('nom','ASC')->get();
+
+            return response()->json($episodes);
+
+        }
+    }
+
+    public function deleteepisode($id)
+    {
+        $saison = Episode::find($id);
+        $episode = Episode::find($id);
+        $episode->delete();
+
+        $episodes = Episode::where('saison_id', $saison->saison_id)->orderBy('nom','ASC')->get();
+        return response()->json($episodes);
     }
 
 
@@ -194,8 +276,27 @@ class SerieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deleteserie($id)
     {
-        //
+        $serie = Video::find($id);
+        $serie->delete();
+
+        $genres = Genre::where('film_id', $id)->get();
+        foreach($genres as $genre){
+            $genre->delete();
+        }
+
+        $acteurs = Acteur::where('film_id', $id)->get();
+        foreach($acteurs as $acteur){
+            $acteur->delete();
+        }
+
+        $saisons = Acteur::where('film_id', $id)->get();
+        foreach($saisons as $saison){
+            $saison->delete();
+        }
+
+        $series = Video::select('*')->where('rubrique','serie')->get();
+        return response()->json($series);
     }
 }

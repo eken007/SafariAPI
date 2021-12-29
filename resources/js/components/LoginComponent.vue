@@ -27,7 +27,7 @@
 
          <!--loading-->
         <div class="flex">
-            <div class="bg-gray-200 w-2/5 hidden lg:block h-screen bg-cover bg-no-repeat bg-center" >
+            <div class="bg-gray-200 w-2/5 hidden lg:block h-screen bg-cover bg-no-repeat bg-center" style=" background-image: url('images/movies.jpg');" >
             
             </div>
             <div class="w-full h-screen flex xl:block items-center">
@@ -36,7 +36,7 @@
                         <p class="hidden xl:block text-right mr-8 text-sm text-gray-500">DashBoard SafariMovies</p>
                     </div>
                     <div class="w-full mt-12">
-                        <p class="text-center text-gray-600 font-bold text-4xl tracking-widest">Bienvenu sur SafariMovies</p>
+                        <p class="text-center text-gray-600 font-bold text-4xl tracking-widest">Bienvenue sur SafariMovies</p>
                     </div>
                     <div class="w-full mt-6">
                         <p class="text-center  text-sm text-gray-500"> Un clic, une histoire</p>

@@ -87,7 +87,7 @@ class FilmsController extends Controller
 
         $film->save();
 
-        $films = Video::where('rubrique','film');
+        $films = Video::select('*')->where('rubrique','film')->get();
 
         return response()->json($films);
 
@@ -203,7 +203,7 @@ class FilmsController extends Controller
             $acteur->delete();
         }
 
-        $films = Video::where('rubrique','film');
+        $films = Video::select('*')->where('rubrique','film')->get();
         return response()->json($films);
     }
 

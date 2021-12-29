@@ -18,6 +18,8 @@ import Dashboard from './components/DashboardComponent.vue';
 import Film from './components/film/FilmComponent.vue';
 import DetailFilm from './components/film/DetailFilmComponent.vue';
 import Serie from './components/serie/SerieComponent.vue';
+import DetailSerie from './components/serie/DetailSerieComponent.vue';
+import DetailSaison from './components/serie/DetailSaisonComponent.vue';
 import WebSerie from './components/webserie/WebSerieComponent.vue';
 import Novelas from './components/novelas/NovelasComponent.vue';
 import EmailVerifie from './components/EmailVerifieComponent.vue';
@@ -75,7 +77,31 @@ const routes = [
                     default: true,
                     two: true
                 }, 
-            },  
+            },
+            {
+                path: '/detailsaison/:saison',
+                name:'detailsaison',
+                components: {
+                    default: Accueil,
+                    two: DetailSaison,
+                  },
+                  props: {
+                    default: true,
+                    two: true
+                }, 
+            },   
+            {
+                path: '/detailserie/:serie',
+                name:'detailserie',
+                components: {
+                    default: Accueil,
+                    two: DetailSerie,
+                  },
+                  props: {
+                    default: true,
+                    two: true
+                }, 
+            },
             {
                 path: '/series',
                 components: {

@@ -9,6 +9,7 @@ use App\Models\Genre;
 use App\Models\Saison;
 use App\Models\Video;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AllRubriquesController extends Controller
 {
@@ -60,7 +61,7 @@ class AllRubriquesController extends Controller
         $genres = Genre::where('film_id', $id )->take(3)->get();
 
             //ses saisons video
-        $saisons = Saison::where('film_id', $id )->get();
+        $saisons = Saison::where('film_id', $id )->orderBy('nom','ASC')->get();
 
             // les films ou series similaires 
         $genre = Genre::where('film_id', $id )->first();
@@ -103,5 +104,20 @@ class AllRubriquesController extends Controller
 
         return response()->json([$films, $series, $users]);
     }
+
+
+    public function allepisodes($id){
+
+            //episodes
+        $episodes = Episode::where('saison_id', $id )->orderBy('nom','ASC')->get();
+
+            // les films ou series similaires 
+        if($episodes){
+            $saison = Saison::where('id', $id )->get();
+        } 
+    
+
+    return response()->json([$episodes, $saison]);
+}
 
 }
