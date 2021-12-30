@@ -278,7 +278,7 @@ data(){
                 this.loading = false
                 
                 console.log(this.data)
-        }).catch(error=> this.errors= error.response.data.message)
+        }).catch(error=> console.log(error))
     },
 
     methods:{

@@ -21,7 +21,11 @@ import Serie from './components/serie/SerieComponent.vue';
 import DetailSerie from './components/serie/DetailSerieComponent.vue';
 import DetailSaison from './components/serie/DetailSaisonComponent.vue';
 import WebSerie from './components/webserie/WebSerieComponent.vue';
+import DetailWebSerie from './components/webserie/DetailWebSerieComponent.vue';
+import DetailSaisonWeb from './components/webserie/DetailSaisonWebComponent.vue';
 import Novelas from './components/novelas/NovelasComponent.vue';
+import DetailNovelas from './components/novelas/DetailSerieNovelasComponent.vue';
+import DetailSaisonNovelas from './components/novelas/DetailSaisonNovelasComponent.vue';
 import EmailVerifie from './components/EmailVerifieComponent.vue';
 import ConfirmeCode from './components/ConfirmeCodeComponent.vue';
 import ResetPassword from './components/ResetPasswordComponent.vue';
@@ -66,6 +70,8 @@ const routes = [
                     two: Film,
                   } 
             },
+
+            /** Route film */
             {
                 path: '/detailfilm/:film',
                 name:'detailfilm',
@@ -78,6 +84,8 @@ const routes = [
                     two: true
                 }, 
             },
+
+            /** Route serie */
             {
                 path: '/detailsaison/:saison',
                 name:'detailsaison',
@@ -102,6 +110,58 @@ const routes = [
                     two: true
                 }, 
             },
+
+            /** Route novelas */
+            {
+                path: '/detailnovelas/:serie',
+                name:'detailnovelas',
+                components: {
+                    default: Accueil,
+                    two: DetailNovelas,
+                  },
+                  props: {
+                    default: true,
+                    two: true
+                }, 
+            },
+            {
+                path: '/detailsaisonnovelas/:saison',
+                name:'detailsaisonnovelas',
+                components: {
+                    default: Accueil,
+                    two: DetailSaisonNovelas,
+                  },
+                  props: {
+                    default: true,
+                    two: true
+                }, 
+            },
+
+            /** Route web serie*/
+            {
+                path: '/detailwebserie/:serie',
+                name:'detailwebserie',
+                components: {
+                    default: Accueil,
+                    two: DetailWebSerie,
+                  },
+                  props: {
+                    default: true,
+                    two: true
+                }, 
+            },
+            {
+                path: '/detailsaisonweb/:saison',
+                name:'detailsaisonweb',
+                components: {
+                    default: Accueil,
+                    two: DetailSaisonWeb,
+                  },
+                  props: {
+                    default: true,
+                    two: true
+                }, 
+            },  
             {
                 path: '/series',
                 components: {

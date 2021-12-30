@@ -98,6 +98,11 @@ export default {
         }
     },
 
+    mounted(){
+        if(localStorage.getItem('jwtToken')){
+            this.$router.push('/accueil');
+        }
+    },
     methods: {
         login(){
            axios.post('/api/login', this.form).then(({data}) => {

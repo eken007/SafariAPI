@@ -59,6 +59,20 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('/deleteacteurserie/{id}', [\App\Http\Controllers\SerieController::class, 'deleteacteur'])->middleware('api.admin');
     Route::delete('/deleteepisodeserie/{id}', [\App\Http\Controllers\SerieController::class, 'deleteepisode'])->middleware('api.admin');
 
+    // route des series novelas
+
+    Route::post('/saveserienovelas', [\App\Http\Controllers\SerieController::class, 'savenovelas'])->middleware('api.admin');
+    Route::get('/allnovelas', [\App\Http\Controllers\SerieController::class, 'allnovelas']);
+    Route::get('/searchnovelas/{titre?}', [\App\Http\Controllers\SerieController::class, 'searchnovelas']);
+    Route::delete('/deletenovelas/{id}', [\App\Http\Controllers\SerieController::class, 'deletenovelas'])->middleware('api.admin');
+
+    // route des web series
+
+    Route::post('/savewebserie', [\App\Http\Controllers\SerieController::class, 'savewebserie'])->middleware('api.admin');
+    Route::get('/allwebserie', [\App\Http\Controllers\SerieController::class, 'allwebserie']);
+    Route::get('/searchwebserie/{titre?}', [\App\Http\Controllers\SerieController::class, 'searchwebserie']);
+    Route::delete('/deletewebserie/{id}', [\App\Http\Controllers\SerieController::class, 'deletewebserie'])->middleware('api.admin');
+
     // routes concernant toutes les rubriques
 
     Route::get('/search', [\App\Http\Controllers\AllRubriquesController::class, 'search']);

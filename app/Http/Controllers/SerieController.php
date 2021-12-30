@@ -97,6 +97,7 @@ class SerieController extends Controller
         return response()->json($series);
     }
 
+    
     /**
      * Display the specified resource.
      *
@@ -296,7 +297,190 @@ class SerieController extends Controller
             $saison->delete();
         }
 
-        $series = Video::select('*')->where('rubrique','serie')->get();
+        $series = Video::select('*')->where('rubrique','serie')->orderBy('created_at','DESC')->get();
         return response()->json($series);
     }
+
+
+
+
+    /**methodes serie novelas*/
+
+
+
+
+
+    public function savenovelas(Request $request)
+    {
+        $serie = new Video();
+
+        $serie->creator_id = Auth::user()->id;
+
+        $serie->titre = $request->titre;
+        $serie->rubrique = 'novelas';
+        $serie->date_de_sortie = $request->date_de_sortie;
+        $serie->description = $request->description;
+        $serie->age = $request->age;
+        $serie->banniere = false;
+
+
+        if ($request->hasfile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $newfilename = time().'.'.$extension;
+            $file->move(public_path('images'),$newfilename);
+            $serie->image = $newfilename;
+        }
+
+        if ($request->hasfile('pub')) {
+            $file = $request->file('pub');
+            $extension = $file->getClientOriginalExtension();
+            $newfilename = time().'.'.$extension;
+            $file->move(public_path('publicites'),$newfilename);
+            $serie->pub = $newfilename;
+        }
+
+        $serie->save();
+
+        $series = Video::select('*')->where('rubrique','novelas')->get();
+
+        return response()->json($series);
+    }
+
+    public function allnovelas(){
+        $series = Video::where('rubrique', 'novelas')->orderBy('created_at','DESC')->get();
+        return response()->json($series);
+    }
+
+    public function searchnovelas()
+    {                                
+        if(request('titre') == null){
+            return $this->refreshnovelas();
+        } else{
+            $series = Video::where('titre','like', '%'.request('titre').'%')->where('rubrique', 'novelas')->orderBy('created_at','DESC')->get();
+            return response()->json($series);
+        }
+    }
+
+    private function refreshnovelas(){
+        $series = Video::orderBy('created_at','DESC')->where('rubrique', 'novelas')->get();
+        return response()->json($series);
+    }
+
+    public function deletenovelas($id)
+    {
+        $novelas = Video::find($id);
+        $novelas->delete();
+
+        $genres = Genre::where('film_id', $id)->get();
+        foreach($genres as $genre){
+            $genre->delete();
+        }
+
+        $acteurs = Acteur::where('film_id', $id)->get();
+        foreach($acteurs as $acteur){
+            $acteur->delete();
+        }
+
+        $saisons = Acteur::where('film_id', $id)->get();
+        foreach($saisons as $saison){
+            $saison->delete();
+        }
+
+        $series = Video::select('*')->where('rubrique','novelas')->orderBy('created_at','DESC')->get();
+        return response()->json($series);
+    }
+
+
+
+
+
+     /**methodes serie novelas*/
+
+
+
+
+
+     public function savewebserie(Request $request)
+     {
+         $serie = new Video();
+ 
+         $serie->creator_id = Auth::user()->id;
+ 
+         $serie->titre = $request->titre;
+         $serie->rubrique = 'web serie';
+         $serie->date_de_sortie = $request->date_de_sortie;
+         $serie->description = $request->description;
+         $serie->age = $request->age;
+         $serie->banniere = false;
+ 
+ 
+         if ($request->hasfile('image')) {
+             $file = $request->file('image');
+             $extension = $file->getClientOriginalExtension();
+             $newfilename = time().'.'.$extension;
+             $file->move(public_path('images'),$newfilename);
+             $serie->image = $newfilename;
+         }
+ 
+         if ($request->hasfile('pub')) {
+             $file = $request->file('pub');
+             $extension = $file->getClientOriginalExtension();
+             $newfilename = time().'.'.$extension;
+             $file->move(public_path('publicites'),$newfilename);
+             $serie->pub = $newfilename;
+         }
+ 
+         $serie->save();
+ 
+         $series = Video::select('*')->where('rubrique','web serie')->get();
+ 
+         return response()->json($series);
+     }
+ 
+     public function allwebserie(){
+         $series = Video::where('rubrique', 'web serie')->orderBy('created_at','DESC')->get();
+         return response()->json($series);
+     }
+ 
+     public function searchwebserie()
+     {                                
+         if(request('titre') == null){
+             return $this->refreshwebserie();
+         } else{
+             $series = Video::where('titre','like', '%'.request('titre').'%')->where('rubrique', 'web serie')->orderBy('created_at','DESC')->get();
+             return response()->json($series);
+         }
+     }
+ 
+     private function refreshwebserie(){
+         $series = Video::orderBy('created_at','DESC')->where('rubrique', 'web serie')->get();
+         return response()->json($series);
+     }
+
+     public function deletewebserie($id)
+    {
+        $novelas = Video::find($id);
+        $novelas->delete();
+
+        $genres = Genre::where('film_id', $id)->get();
+        foreach($genres as $genre){
+            $genre->delete();
+        }
+
+        $acteurs = Acteur::where('film_id', $id)->get();
+        foreach($acteurs as $acteur){
+            $acteur->delete();
+        }
+
+        $saisons = Acteur::where('film_id', $id)->get();
+        foreach($saisons as $saison){
+            $saison->delete();
+        }
+
+        $series = Video::select('*')->where('rubrique','web serie')->orderBy('created_at','DESC')->get();
+        return response()->json($series);
+    }
+
+
 }

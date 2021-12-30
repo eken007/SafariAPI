@@ -224,7 +224,7 @@
         <!--Bar search-->
       <div class=" h-16 bg-gray-900 shadow-2xl flex fixed px-2" style=" width: 80%;">
            <div class=" w-1/4 h-full flex items-center">
-                <router-link to="/Series"><img  class="w-8 h-8 ml-4" src="images/return.png" alt=""></router-link>
+                <router-link to="/webseries"><img  class="w-8 h-8 ml-4" src="images/return.png" alt=""></router-link>
            </div>        
           <div class=" w-2/4 h-full flex items-center">
               <p class=" mx-auto text-white text-3xl font-semibold">{{ detailSerie.titre }}</p>
@@ -260,7 +260,7 @@
                                     d="M6 18L18 6M6 6l12 12"></path>
                                 </svg>
                             </button>
-                            <router-link :to="{name:'detailsaison', params:{saison: saisonSerie.id} }" class=" w-36 h-44 ml-6 mt-6 space-y-4">
+                            <router-link :to="{name:'detailsaisonweb', params:{saison: saisonSerie.id} }" class=" w-36 h-44 ml-6 mt-6 space-y-4">
                                 <div class=" w-full h-1/2 flex">
                                     <img class=" w-28 h-28 mx-auto" src="images/folder.png">
                                 </div>
@@ -326,9 +326,9 @@
                             <p class=" font-semibold">date de sortie: {{detailSerie.date_de_sortie}}</p>
                         </div>
                     </div>
-                    <div class=" w-full mt-3 ml-2" v-if="detailSerie.qualite">
+                    <div class=" w-full mt-3 ml-2">
                         <div>
-                            <p class=" font-semibold">qualite: {{detailSerie.qualite}}</p>
+                            <p class=" font-semibold" v-if="detailSerie.qualite">qualite: {{detailSerie.qualite}}</p>
                         </div>
                     </div>
                     <div class=" w-full mt-3 ml-2">

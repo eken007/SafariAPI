@@ -129,7 +129,7 @@ class FilmsController extends Controller
         $acteur = Acteur::find($id);
         $acteur->delete();
 
-        $acteurs = Acteur::where('film_id', $film->film_id)->get();
+        $acteurs = Acteur::where('film_id', $film->film_id)->orderBy('created_at','DESC')->get();
         return response()->json($acteurs);
     }
 
@@ -155,7 +155,7 @@ class FilmsController extends Controller
         $genre = Genre::find($id);
         $genre->delete();
 
-        $genres = Genre::where('film_id', $film->film_id)->get();
+        $genres = Genre::where('film_id', $film->film_id)->orderBy('created_at','DESC')->get();
         return response()->json($genres);
     }
 
@@ -203,7 +203,7 @@ class FilmsController extends Controller
             $acteur->delete();
         }
 
-        $films = Video::select('*')->where('rubrique','film')->get();
+        $films = Video::select('*')->where('rubrique','film')->orderBy('created_at','DESC')->get();
         return response()->json($films);
     }
 
