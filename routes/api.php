@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// route utilisateur non protege
 
 Route::post('/register', [\App\Http\Controllers\Api\PassportController::class, 'register']);
 Route::post('/login', [\App\Http\Controllers\Api\PassportController::class, 'login']);
@@ -85,7 +86,10 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('/deleteuser/{id}', [\App\Http\Controllers\Api\PassportController::class, 'destroy'])->middleware('api.admin');
     Route::put('/edituser', [\App\Http\Controllers\Api\PassportController::class, 'edit'])->middleware('api.admin');
     Route::get('/allepisodes/{id}', [\App\Http\Controllers\AllRubriquesController::class, 'allepisodes']);
+
+    // route utilisateur protege
     
+    Route::get('/searchusers/{name?}', [\App\Http\Controllers\Api\PassportController::class, 'search']);
     
 });
 

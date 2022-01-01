@@ -52,7 +52,7 @@
                             <div class="border-l-4 border-gray-900   hover:border-blue-600 flex md:w-3/6 w-5/6  shadow-lg mx-auto transform hover:scale-110 motion-reduce:transform-none">
                                 <div  class="w-full">
                                         <div class="relative">
-                                            <input v-model="form.email" class="border-0 bg-transparent appearance-none  focus:outline-none text-gray-600 px-2 min-w-full py-4 " placeholder="iuc@gmail.com">
+                                            <input v-model="form.email" class="border-0 bg-transparent appearance-none  focus:outline-none text-gray-600 px-2 min-w-full py-4 " placeholder="codexsarl@gmail.com">
                                         </div>
                                 </div>
                             </div> 

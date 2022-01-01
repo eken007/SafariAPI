@@ -108,4 +108,19 @@ class PassportController extends Controller
         $users = User::all();
         return response()->json($users);
     }
+
+    public function search()
+    {                                
+        if(request('name') == null){
+            return $this->refresh();
+        } else{
+            $users = User::where('name','like', '%'.request('name').'%')->orderBy('created_at','DESC')->get();
+            return response()->json($users);
+        }
+    }
+
+    private function refresh(){
+        $users = User::orderBy('created_at','DESC')->get();
+        return response()->json($users);
+    }
 }

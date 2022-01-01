@@ -6005,6 +6005,112 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -6013,8 +6119,8 @@ __webpack_require__.r(__webpack_exports__);
       films: {},
       series: {},
       novelas: {},
+      name: '',
       webseries: {},
-      random: '',
       users: {},
       param: {
         idEdit: '',
@@ -6063,6 +6169,25 @@ __webpack_require__.r(__webpack_exports__);
     pageLogin: function pageLogin() {
       this.$router.push('/');
       this.$router.go();
+    },
+    search: function search() {
+      var _this4 = this;
+
+      if (this.name.length > 0) {
+        axios.get('/api/searchusers/' + this.name).then(function (_ref2) {
+          var data = _ref2.data;
+          _this4.users = data;
+        })["catch"](function (error) {
+          return console.log(error);
+        });
+      } else {
+        axios.get('/api/searchusers/' + this.name).then(function (_ref3) {
+          var data = _ref3.data;
+          _this4.users = data;
+        })["catch"](function (error) {
+          return console.log(error);
+        });
+      }
     }
   }
 });
@@ -35471,13 +35596,157 @@ var render = function () {
                   "flex-1 overflow-x-hidden overflow-y-auto bg-gray-200",
               },
               [
-                _c("div", { staticClass: "container mx-auto px-6 py-8" }, [
-                  _c(
-                    "h3",
-                    { staticClass: "text-gray-700 text-3xl font-medium" },
-                    [_vm._v("Dashboard")]
-                  ),
-                  _vm._v(" "),
+                _c(
+                  "header",
+                  {
+                    staticClass:
+                      "fixed w-full lg:w-4/5 flex justify-between items-center py-4 px-6  bg-white border-b-4 border-indigo-600",
+                  },
+                  [
+                    _c("div", { staticClass: "flex items-center" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "text-gray-500 focus:outline-none lg:hidden",
+                        },
+                        [
+                          _c(
+                            "svg",
+                            {
+                              staticClass: "h-6 w-6",
+                              attrs: {
+                                viewBox: "0 0 24 24",
+                                fill: "none",
+                                xmlns: "http://www.w3.org/2000/svg",
+                              },
+                            },
+                            [
+                              _c("path", {
+                                attrs: {
+                                  d: "M4 6H20M4 12H20M4 18H11",
+                                  stroke: "currentColor",
+                                  "stroke-width": "2",
+                                  "stroke-linecap": "round",
+                                  "stroke-linejoin": "round",
+                                },
+                              }),
+                            ]
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "relative mx-4 lg:mx-0" }, [
+                        _c(
+                          "span",
+                          {
+                            staticClass:
+                              "absolute inset-y-0 left-0 pl-3 flex items-center",
+                          },
+                          [
+                            _c(
+                              "svg",
+                              {
+                                staticClass: "h-5 w-5 text-gray-500",
+                                attrs: { viewBox: "0 0 24 24", fill: "none" },
+                              },
+                              [
+                                _c("path", {
+                                  attrs: {
+                                    d: "M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z",
+                                    stroke: "currentColor",
+                                    "stroke-width": "2",
+                                    "stroke-linecap": "round",
+                                    "stroke-linejoin": "round",
+                                  },
+                                }),
+                              ]
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.name,
+                              expression: "name",
+                            },
+                          ],
+                          staticClass:
+                            "form-input w-32 sm:w-64 rounded-md pl-10 pr-4 focus:border-indigo-600",
+                          attrs: { type: "text", placeholder: "Search" },
+                          domProps: { value: _vm.name },
+                          on: {
+                            keyup: _vm.search,
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.name = $event.target.value
+                            },
+                          },
+                        }),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "flex items-center" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "relative",
+                          attrs: { "x-data": "{ notificationOpen: false }" },
+                        },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "flex mx-4 text-gray-600 focus:outline-none",
+                            },
+                            [
+                              _c(
+                                "svg",
+                                {
+                                  staticClass: "h-6 w-6",
+                                  attrs: {
+                                    viewBox: "0 0 24 24",
+                                    fill: "none",
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                  },
+                                },
+                                [
+                                  _c("path", {
+                                    attrs: {
+                                      d: "M15 17H20L18.5951 15.5951C18.2141 15.2141 18 14.6973 18 14.1585V11C18 8.38757 16.3304 6.16509 14 5.34142V5C14 3.89543 13.1046 3 12 3C10.8954 3 10 3.89543 10 5V5.34142C7.66962 6.16509 6 8.38757 6 11V14.1585C6 14.6973 5.78595 15.2141 5.40493 15.5951L4 17H9M15 17V18C15 19.6569 13.6569 21 12 21C10.3431 21 9 19.6569 9 18V17M15 17H9",
+                                      stroke: "currentColor",
+                                      "stroke-width": "2",
+                                      "stroke-linecap": "round",
+                                      "stroke-linejoin": "round",
+                                    },
+                                  }),
+                                ]
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("div", {
+                            staticClass: "fixed inset-0 h-full w-full z-10",
+                            staticStyle: { display: "none" },
+                            attrs: { "x-show": "notificationOpen" },
+                          }),
+                          _vm._v(" "),
+                          _vm._m(1),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm._m(2),
+                    ]),
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "container mx-auto px-6 py-8 mt-4" }, [
                   _c("div", { staticClass: "mt-4" }, [
                     _c(
                       "div",
@@ -35916,7 +36185,7 @@ var render = function () {
                           },
                           [
                             _c("table", { staticClass: "min-w-full" }, [
-                              _vm._m(1),
+                              _vm._m(3),
                               _vm._v(" "),
                               _c(
                                 "tbody",
@@ -35941,7 +36210,7 @@ var render = function () {
                                       ]
                                     ),
                                     _vm._v(" "),
-                                    _vm._m(2, true),
+                                    _vm._m(4, true),
                                     _vm._v(" "),
                                     _c(
                                       "td",
@@ -36095,6 +36364,200 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-xl overflow-hidden z-10",
+        staticStyle: { width: "20rem", display: "none" },
+        attrs: { "x-show": "notificationOpen" },
+      },
+      [
+        _c(
+          "a",
+          {
+            staticClass:
+              "flex items-center px-4 py-3 text-gray-600 hover:text-white hover:bg-indigo-600 -mx-2",
+            attrs: { href: "#" },
+          },
+          [
+            _c("img", {
+              staticClass: "h-8 w-8 rounded-full bg-black object-cover mx-1",
+              attrs: { src: "/logos/logoblanc.png", alt: "avatar" },
+            }),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-sm mx-2" }, [
+              _c("span", { staticClass: "font-bold", attrs: { href: "#" } }, [
+                _vm._v("Sara Salah"),
+              ]),
+              _vm._v(" replied on the "),
+              _c(
+                "span",
+                {
+                  staticClass: "font-bold text-indigo-400",
+                  attrs: { href: "#" },
+                },
+                [_vm._v("Upload Image")]
+              ),
+              _vm._v(" artical . 2m\n                          "),
+            ]),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass:
+              "flex items-center px-4 py-3 text-gray-600 hover:text-white hover:bg-indigo-600 -mx-2",
+            attrs: { href: "#" },
+          },
+          [
+            _c("img", {
+              staticClass: "h-8 w-8 rounded-full bg-black object-cover mx-1",
+              attrs: { src: "/logos/logoblanc.png", alt: "avatar" },
+            }),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-sm mx-2" }, [
+              _c("span", { staticClass: "font-bold", attrs: { href: "#" } }, [
+                _vm._v("Slick Net"),
+              ]),
+              _vm._v(" start following you . 45m\n                          "),
+            ]),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass:
+              "flex items-center px-4 py-3 text-gray-600 hover:text-white hover:bg-indigo-600 -mx-2",
+            attrs: { href: "#" },
+          },
+          [
+            _c("img", {
+              staticClass: "h-8 w-8 rounded-full bg-black object-cover mx-1",
+              attrs: { src: "/logos/logoblanc.png", alt: "avatar" },
+            }),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-sm mx-2" }, [
+              _c("span", { staticClass: "font-bold", attrs: { href: "#" } }, [
+                _vm._v("Jane Doe"),
+              ]),
+              _vm._v(" Like Your reply on "),
+              _c(
+                "span",
+                {
+                  staticClass: "font-bold text-indigo-400",
+                  attrs: { href: "#" },
+                },
+                [_vm._v("Test with TDD")]
+              ),
+              _vm._v(" artical . 1h\n                          "),
+            ]),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass:
+              "flex items-center px-4 py-3 text-gray-600 hover:text-white hover:bg-indigo-600 -mx-2",
+            attrs: { href: "#" },
+          },
+          [
+            _c("img", {
+              staticClass: "h-8 w-8 bg-black rounded-full object-cover mx-1",
+              attrs: { src: "/logos/logoblanc.png", alt: "avatar" },
+            }),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-sm mx-2" }, [
+              _c("span", { staticClass: "font-bold", attrs: { href: "#" } }, [
+                _vm._v("Abigail Bennett"),
+              ]),
+              _vm._v(" start following you . 3h\n                          "),
+            ]),
+          ]
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "relative",
+        attrs: { "x-data": "{ dropdownOpen: false }" },
+      },
+      [
+        _c(
+          "button",
+          {
+            staticClass:
+              "relative block h-8 w-8 rounded-full overflow-hidden shadow focus:outline-none",
+          },
+          [
+            _c("img", {
+              staticClass: "h-full bg-black w-full object-cover",
+              attrs: { src: "/logos/logoblanc.png", alt: "Your avatar" },
+            }),
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", {
+          staticClass: "fixed inset-0 h-full w-full z-10",
+          staticStyle: { display: "none" },
+        }),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "absolute right-0 mt-2 w-48 bg-white rounded-md overflow-hidden shadow-xl z-10",
+            staticStyle: { display: "none" },
+            attrs: { "x-show": "dropdownOpen" },
+          },
+          [
+            _c(
+              "a",
+              {
+                staticClass:
+                  "block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white",
+                attrs: { href: "#" },
+              },
+              [_vm._v("Profile")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass:
+                  "block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white",
+                attrs: { href: "#" },
+              },
+              [_vm._v("Products")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass:
+                  "block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white",
+                attrs: { href: "/login" },
+              },
+              [_vm._v("Logout")]
+            ),
+          ]
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
         _c(
@@ -36159,11 +36622,8 @@ var staticRenderFns = [
         _c("div", { staticClass: "flex items-center" }, [
           _c("div", { staticClass: "flex-shrink-0 h-10 w-10" }, [
             _c("img", {
-              staticClass: "h-10 w-10 rounded-full",
-              attrs: {
-                src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-                alt: "",
-              },
+              staticClass: "h-10 w-10 rounded-full bg-black",
+              attrs: { src: "/logos/logoblanc.png", alt: "" },
             }),
           ]),
         ]),
@@ -36445,7 +36905,7 @@ var render = function () {
                               ],
                               staticClass:
                                 "border-0 bg-transparent appearance-none  focus:outline-none text-gray-600 px-2 min-w-full py-4 ",
-                              attrs: { placeholder: "iuc@gmail.com" },
+                              attrs: { placeholder: "codexsarl@gmail.com" },
                               domProps: { value: _vm.form.email },
                               on: {
                                 input: function ($event) {
