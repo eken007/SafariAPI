@@ -92,7 +92,7 @@ class AllRubriquesController extends Controller
         $series = Video::select('*')->where('rubrique', 'serie')->get();
     
         //webseries
-        $webseries = Video::select('*')->where('rubrique', 'web series')->get();
+        $webseries = Video::select('*')->where('rubrique', 'web serie')->get();
     
         //novelas
         $novelas = Video::select('*')->where('rubrique', 'novelas')->get();
@@ -102,7 +102,7 @@ class AllRubriquesController extends Controller
         $users = User::all();
         
 
-        return response()->json([$films, $series, $users]);
+        return response()->json([$films, $series, $users, $webseries,$novelas]);
     }
 
 

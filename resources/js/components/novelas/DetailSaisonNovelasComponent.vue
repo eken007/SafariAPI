@@ -72,7 +72,7 @@
                                                             <button class="  bg-red-500 text-white rounded-xl absolute right-2 px-3" v-if="this.form.video"  @click="removeVideo">effacer</button>
                                                         </div>
                                                     </div>
-                                                    <input @change="onVideoFile" type="file" class=" mt-2 border-2 bg-transparent appearance-none  focus:outline-none text-gray-600 px-2 w-full py-2 ">
+                                                    <input @change="onVideoFile" type="file" accept="video/*" class=" mt-2 border-2 bg-transparent appearance-none  focus:outline-none text-gray-600 px-2 w-full py-2 ">
                                                 </div>
                                             </div>
                                             <div class=" w-full flex">
@@ -93,7 +93,7 @@
     </transition>
         <div class=" h-16 bg-gray-900 shadow-2xl flex fixed px-2" style=" width: 80%;">
            <div class=" w-1/4 h-full flex items-center">
-                <router-link to="/Novelas"><img  class="w-8 h-8 ml-4" src="images/return.png" alt=""></router-link>
+                <router-link to="/Novelas"><img  class="w-8 h-8 ml-4" src="/images/return.png" alt=""></router-link>
            </div>        
           <div class=" w-2/4 h-full flex items-center">
               <p class=" mx-auto text-white text-3xl font-semibold">{{saisons.nom}}</p>
@@ -123,7 +123,7 @@
                             </button>
                             <div class=" w-36 h-44 ml-6 mt-6 space-y-6">
                                 <div class=" w-full h-1/2 flex">
-                                    <img class=" w-28 h-28 mx-auto" src="images/vlc1.png">
+                                    <img class=" w-28 h-28 mx-auto" src="/images/vlc1.png">
                                 </div>
                                 <div class=" w-full h-1/2 flex">
                                     <div class="w-28 h-28 mx-auto">

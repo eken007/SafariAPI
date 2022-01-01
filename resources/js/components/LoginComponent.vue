@@ -47,7 +47,7 @@
             
                             <!--Email-->
             
-                    <form>
+                    <form @submit.prevent="login">
                         <div class=" mt-6 ">
                             <div class="border-l-4 border-gray-900   hover:border-blue-600 flex md:w-3/6 w-5/6  shadow-lg mx-auto transform hover:scale-110 motion-reduce:transform-none">
                                 <div  class="w-full">
@@ -71,7 +71,7 @@
                                             <!--btn connexion-->
                             <div class="flex mt-6 " >
                                 <div class="mx-auto transform hover:scale-110 motion-reduce:transform-none">
-                                    <button @click="login(); loading=true"  class="px-4 py-3 bg-blue-600  rounded-full text-sm text-white  hover:bg-blue-300 shadow-lg w-48 text-center font-bold">Connexion </button>
+                                    <button type="submit" @click="loading=true"  class="px-4 py-3 bg-blue-600  rounded-full text-sm text-white  hover:bg-blue-300 shadow-lg w-48 text-center font-bold">Connexion </button>
                                 </div>
                             </div>
                         </div>

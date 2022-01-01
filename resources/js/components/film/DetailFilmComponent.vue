@@ -120,7 +120,7 @@
                                             </svg>
                                         </div>
                                         <p class=" text-center text-sm text-gray-500">Voulez allez Ajouter un genre</p>
-                                        <form class=" space-y-6">
+                                        <form @submit.prevent="addGenre" class=" space-y-6">
                                             <div class="w-full h-full mt-4">
                                                 <select  v-model="formGenre.nom" class="border w-full h-full bg-white text-black py-2 px-3 text-grey-800">
                                                     <option  value="">Choisissez un genre</option>
@@ -134,7 +134,7 @@
                                                 </select>
                                             </div>
                                             <div class=" w-full flex">
-                                                <button @click="addGenre(); genreloading = 'non'" class=" bg-blue-500 px-4 py-3 text-white hover:bg-blue-300 mx-auto rounded-lg">Enregistrer</button>
+                                                <button @click="genreloading = 'non'" class=" bg-blue-500 px-4 py-3 text-white hover:bg-blue-300 mx-auto rounded-lg">Enregistrer</button>
                                             </div>
                                         </form>
                                     </div>
@@ -152,17 +152,17 @@
         <!--Bar search-->
       <div class=" h-16 bg-gray-900 shadow-2xl flex fixed px-2" style=" width: 80%;">
            <div class=" w-1/4 h-full flex items-center">
-                <router-link to="/films"><img  class="w-8 h-8 ml-4" src="images/return.png" alt=""></router-link>
+                <router-link to="/movies"><img  class="w-8 h-8 ml-4" src="/images/return.png" alt=""></router-link>
            </div>        
           <div class=" w-2/4 h-full flex items-center">
               <p class=" mx-auto text-white text-3xl font-semibold">{{ detailFilm.titre }}</p>
           </div>
           <div class=" w-1/4 h-full flex items-center">
               <div class="h-10 mx-auto space-x-3 flex">
-                    <img @click="hidacteur = true"  class="w-10 h-10 ml-4" src="images/acteur.png" alt="">
-                    <img @click="hidgenre = true"  class="w-10 h-10 ml-4" src="images/genre.png" alt="">
-                    <img @click="ActivePubFilm()"  class="w-10 h-10 ml-4" v-if="detailFilm.banniere == true" src="images/on.png" alt="">
-                    <img @click="ActivePubFilm()"  class="w-10 h-10 ml-4" v-if="detailFilm.banniere == false" src="images/off.png" alt="">
+                    <img @click="hidacteur = true"  class="w-10 h-10 ml-4" src="/images/acteur.png" alt="">
+                    <img @click="hidgenre = true"  class="w-10 h-10 ml-4" src="/images/genre.png" alt="">
+                    <img @click="ActivePubFilm()"  class="w-10 h-10 ml-4" v-if="detailFilm.banniere == true" src="/images/on.png" alt="">
+                    <img @click="ActivePubFilm()"  class="w-10 h-10 ml-4" v-if="detailFilm.banniere == false" src="/images/off.png" alt="">
               </div>
           </div>
       </div>
@@ -234,7 +234,7 @@
                     <div class=" space-x-3 flex ml-2 mt-3" v-if="genresFilm">
                         <div class=" px-3 py-1 rounded-xl bg-gray-500 flex items-center space-x-2" v-for="genreFilm in genresFilm" :key="genreFilm.id">
                             <p class=" text-sm text-white">{{ genreFilm.nom }}</p>
-                            <img @click="deleteGenreFilm(genreFilm.id)" class=" w-3 h-3" src="images/close.png" alt="">
+                            <img @click="deleteGenreFilm(genreFilm.id)" class=" w-3 h-3" src="/images/close.png" alt="">
                         </div>
                     </div>
                     <div class=" w-full mt-6">

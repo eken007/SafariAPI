@@ -63,13 +63,6 @@ const routes = [
                     two: Dashboard,
                   } 
             }, 
-            {
-                path: '/films',
-                components: {
-                    default: Accueil,
-                    two: Film,
-                  } 
-            },
 
             /** Route film */
             {
@@ -83,6 +76,13 @@ const routes = [
                     default: true,
                     two: true
                 }, 
+            },
+            {
+                path: '/movies',
+                components: {
+                    default: Accueil,
+                    two: Film,
+                  } 
             },
 
             /** Route serie */
@@ -188,7 +188,9 @@ const routes = [
    
 ]
 
-const router = new VueRouter({routes});
+const router = new VueRouter({mode: 'history',
+    hashbang: false,
+    linkActiveClass: 'active',routes});
 
 const app = new Vue({
     el: '#app',

@@ -65,7 +65,7 @@
                                                             <button class="  bg-red-500 text-white rounded-xl absolute right-2 px-3" v-if="this.form.image"  @click="removeImage">effacer</button>
                                                         </div>
                                                     </div>
-                                                    <input @change="onImageFile" type="file" class="mt-2 border-2 bg-transparent appearance-none  focus:outline-none text-gray-600 px-2 w-full py-2 ">
+                                                    <input @change="onImageFile" type="file" accept="image/*" class="mt-2 border-2 bg-transparent appearance-none  focus:outline-none text-gray-600 px-2 w-full py-2 ">
                                                 </div>
                                                 <div>
                                                     <div class="flex w-full">
@@ -76,7 +76,7 @@
                                                             <button class="  bg-red-500 text-white rounded-xl absolute right-2 px-3" v-if="this.form.pub"  @click="removePub">effacer</button>
                                                         </div>
                                                     </div>
-                                                    <input @change="onPubFile" type="file" class="mt-2 border-2 bg-transparent appearance-none  focus:outline-none text-gray-600 px-2 w-full py-2 ">
+                                                    <input @change="onPubFile" type="file" accept="image/*" class="mt-2 border-2 bg-transparent appearance-none  focus:outline-none text-gray-600 px-2 w-full py-2 ">
                                                 </div>
                                             </div>
                                             <div class=" w-full flex">
