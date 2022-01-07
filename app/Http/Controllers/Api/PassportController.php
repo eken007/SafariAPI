@@ -85,7 +85,7 @@ class PassportController extends Controller
         $user = User::find($id);
         $user->tokens()->delete();
         $user->delete();
-        $users = User::all();
+        $users = User::select('*')->orderBy('created_at','DESC')->get();
         if($user){ 
             return response()->json($users);
         }

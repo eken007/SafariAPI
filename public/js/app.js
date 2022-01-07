@@ -6110,7 +6110,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -35593,7 +35592,8 @@ var render = function () {
               "main",
               {
                 staticClass:
-                  "flex-1 overflow-x-hidden overflow-y-auto bg-gray-200",
+                  "flex-1 overflow-x-hidden overflow-hidden overflow-y-visible  bg-gray-200",
+                staticStyle: { height: "39rem" },
               },
               [
                 _c(
@@ -36174,17 +36174,17 @@ var render = function () {
                       "div",
                       {
                         staticClass:
-                          "-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8",
+                          "-my-2 py-2 overflow-x-auto  sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8",
                       },
                       [
                         _c(
                           "div",
                           {
                             staticClass:
-                              "align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200",
+                              "align-middle inline-block min-w-full shadow overflow-hidden  sm:rounded-lg border-b border-gray-200",
                           },
                           [
-                            _c("table", { staticClass: "min-w-full" }, [
+                            _c("table", { staticClass: "min-w-full " }, [
                               _vm._m(3),
                               _vm._v(" "),
                               _c(
@@ -36312,21 +36312,19 @@ var render = function () {
                                           [_vm._v("Edit")]
                                         ),
                                         _vm._v(" "),
-                                        _c("form", [
-                                          _c(
-                                            "button",
-                                            {
-                                              staticClass:
-                                                "bg-red-500 py-3 px-3 rounded-xl text-white hover:text-red-500 border-2 hover:bg-transparent border-red-500",
-                                              on: {
-                                                click: function ($event) {
-                                                  return _vm.deleteUser(user.id)
-                                                },
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "bg-red-500 py-3 px-3 rounded-xl text-white hover:text-red-500 border-2 hover:bg-transparent border-red-500",
+                                            on: {
+                                              click: function ($event) {
+                                                return _vm.deleteUser(user.id)
                                               },
                                             },
-                                            [_vm._v("Supprimer")]
-                                          ),
-                                        ]),
+                                          },
+                                          [_vm._v("Supprimer")]
+                                        ),
                                       ]
                                     ),
                                   ])

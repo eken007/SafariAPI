@@ -99,7 +99,7 @@ class AllRubriquesController extends Controller
 
         //users
 
-        $users = User::all();
+        $users = User::select('*')->orderBy('created_at','DESC')->get();
         
 
         return response()->json([$films, $series, $users, $webseries,$novelas]);

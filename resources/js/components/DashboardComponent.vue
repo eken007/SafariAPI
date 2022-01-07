@@ -91,7 +91,7 @@
 
     <!--Partie Statistique-->
     <div v-if="this.errors == '' ">
-        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+        <main class="flex-1 overflow-x-hidden overflow-hidden overflow-y-visible  bg-gray-200" style=" height: 39rem">
         <header class="fixed w-full lg:w-4/5 flex justify-between items-center py-4 px-6  bg-white border-b-4 border-indigo-600">
             <div class="flex items-center">
                 <button  class="text-gray-500 focus:outline-none lg:hidden">
@@ -450,10 +450,10 @@
             
             <div class="mt-8"></div> 
             <div class="flex flex-col mt-8">
-                <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+                <div class="-my-2 py-2 overflow-x-auto  sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                     <div
-                        class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
-                        <table class="min-w-full">
+                        class="align-middle inline-block min-w-full shadow overflow-hidden  sm:rounded-lg border-b border-gray-200">
+                        <table class="min-w-full ">
                             <thead>
                                 <tr>
                                     <th
@@ -506,10 +506,9 @@
                                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-400 text-white" v-if="user.type == 2">admin</span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-no-wrap text-right border-b space-x-2 border-gray-200 text-sm leading-5 font-medium flex">
-                                                <a @click="hidden = true; param.idEdit = user.id"  class="bg-blue-500 py-3 px-8 rounded-xl text-white hover:text-blue-500 hover:bg-transparent border-2 border-blue-500">Edit</a>
-                                                <form >
-                                                    <button  class="bg-red-500 py-3 px-3 rounded-xl text-white hover:text-red-500 border-2 hover:bg-transparent border-red-500" @click="deleteUser(user.id)">Supprimer</button>
-                                                </form>
+                                            <a @click="hidden = true; param.idEdit = user.id"  class="bg-blue-500 py-3 px-8 rounded-xl text-white hover:text-blue-500 hover:bg-transparent border-2 border-blue-500">Edit</a>
+                                                
+                                            <button  class="bg-red-500 py-3 px-3 rounded-xl text-white hover:text-red-500 border-2 hover:bg-transparent border-red-500" @click="deleteUser(user.id)">Supprimer</button>    
                                         </td>
                                 </tr>  
                             </tbody>
