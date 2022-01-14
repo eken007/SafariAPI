@@ -29,8 +29,9 @@ class PassportController extends Controller
         $request['type'] = $request['type'] ? $request['type']  : 0;
         $user = User::create($request->toArray());
         $token = $user->createToken('Laravel Password Grant Client')->accessToken;
+        $message = 'success';
         $response = ['token' => $token];
-        return response(['user'=>$user, 'access_token'=> $response]);
+        return response(['user'=>$user, 'access_token'=> $response, 'message' => $message]);
     }
 
     public function resetpassword(Request $request, $id) {
@@ -62,7 +63,8 @@ class PassportController extends Controller
             if (Hash::check($request->password, $user->password)) {
                 $token = $user->createToken('Laravel Password Grant Client')->accessToken;
                 $response = ['token' => $token];
-                return response(['user'=>$user, 'access_token'=> $response]);
+                $message = 'success';
+                return response(['user'=>$user, 'access_token'=> $response, 'message' => $message]);
             } else {
                 $response = ["message" => "Password mismatch"];
                 return response($response, 422);

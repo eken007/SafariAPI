@@ -126,11 +126,12 @@
                                                     <option  value="">Choisissez un genre</option>
                                                     <option>Action</option>
                                                     <option>Aventure</option>
-                                                    <option>Comique</option>
+                                                    <option>Comédie</option>
                                                     <option>Drame</option>
                                                     <option>Horreur</option>
                                                     <option>Documentaire</option>
                                                     <option>Fantastique</option>
+                                                    <option>Romantique</option>
                                                 </select>
                                             </div>
                                             <div class=" w-full flex">

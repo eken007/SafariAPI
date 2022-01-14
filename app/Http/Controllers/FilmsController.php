@@ -17,9 +17,7 @@ class FilmsController extends Controller
      */
     public function index()
     {
-            $films = Video::where('rubrique', 'film')->orderBy('created_at','DESC')->take(20)->get();
-            return response()->json($films);
-        
+            
         //$response = ['message' => 'article index'];
         //return response($response, 200);
 

@@ -32,7 +32,6 @@ Route::middleware('auth:api')->group(function () {
 
     // route des films
 
-    Route::get('/films', [\App\Http\Controllers\FilmsController::class, 'index']);
     Route::get('/searchfilms/{titre}', [\App\Http\Controllers\FilmsController::class, 'search']);
     Route::get('/allfilms', [\App\Http\Controllers\FilmsController::class, 'allFilms']);
     Route::post('/savefilm', [\App\Http\Controllers\FilmsController::class, 'store'])->middleware('api.admin');
@@ -46,7 +45,6 @@ Route::middleware('auth:api')->group(function () {
 
     // route des series
 
-    Route::get('/series', [\App\Http\Controllers\SerieController::class, 'index']);
     Route::get('/allseries', [\App\Http\Controllers\SerieController::class, 'allSeries']);
     Route::post('/saveserie', [\App\Http\Controllers\SerieController::class, 'store'])->middleware('api.admin');
     Route::post('/saveacteurserie', [\App\Http\Controllers\SerieController::class, 'saveacteur'])->middleware('api.admin');
@@ -76,8 +74,8 @@ Route::middleware('auth:api')->group(function () {
 
     // routes concernant toutes les rubriques
 
+    Route::get('/accueil', [\App\Http\Controllers\AllRubriquesController::class, 'index']);
     Route::get('/search', [\App\Http\Controllers\AllRubriquesController::class, 'search']);
-    
     Route::get('/publicite', [\App\Http\Controllers\AllRubriquesController::class, 'publicite']);
     Route::get('/detailpage/{id}', [\App\Http\Controllers\AllRubriquesController::class, 'detailpage']);
     Route::get('/episodes/{id}', [\App\Http\Controllers\AllRubriquesController::class, 'episodes']);

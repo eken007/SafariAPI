@@ -7831,6 +7831,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['serie'],
   data: function data() {
@@ -8846,6 +8847,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['serie'],
   data: function data() {
@@ -9507,6 +9509,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
 //
 //
 //
@@ -39806,7 +39809,7 @@ var render = function () {
                                                         },
                                                         [
                                                           _vm._v(
-                                                            "Choisissez une saison"
+                                                            "Choisissez un épisode"
                                                           ),
                                                         ]
                                                       ),
@@ -40952,7 +40955,7 @@ var render = function () {
                                                       ]),
                                                       _vm._v(" "),
                                                       _c("option", [
-                                                        _vm._v("Comique"),
+                                                        _vm._v("Comédie"),
                                                       ]),
                                                       _vm._v(" "),
                                                       _c("option", [
@@ -40969,6 +40972,10 @@ var render = function () {
                                                       _vm._v(" "),
                                                       _c("option", [
                                                         _vm._v("Fantastique"),
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c("option", [
+                                                        _vm._v("Romantique"),
                                                       ]),
                                                     ]
                                                   ),
@@ -43012,7 +43019,7 @@ var render = function () {
                                                         },
                                                         [
                                                           _vm._v(
-                                                            "Choisissez une saison"
+                                                            "Choisissez un épisode"
                                                           ),
                                                         ]
                                                       ),
@@ -44158,7 +44165,7 @@ var render = function () {
                                                       ]),
                                                       _vm._v(" "),
                                                       _c("option", [
-                                                        _vm._v("Comique"),
+                                                        _vm._v("Comédie"),
                                                       ]),
                                                       _vm._v(" "),
                                                       _c("option", [
@@ -44175,6 +44182,10 @@ var render = function () {
                                                       _vm._v(" "),
                                                       _c("option", [
                                                         _vm._v("Fantastique"),
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c("option", [
+                                                        _vm._v("Romantique"),
                                                       ]),
                                                     ]
                                                   ),
@@ -46215,7 +46226,7 @@ var render = function () {
                                                         },
                                                         [
                                                           _vm._v(
-                                                            "Choisissez une saison"
+                                                            "Choisissez un épisode"
                                                           ),
                                                         ]
                                                       ),
@@ -47361,7 +47372,7 @@ var render = function () {
                                                       ]),
                                                       _vm._v(" "),
                                                       _c("option", [
-                                                        _vm._v("Comique"),
+                                                        _vm._v("Comédie"),
                                                       ]),
                                                       _vm._v(" "),
                                                       _c("option", [
@@ -47378,6 +47389,10 @@ var render = function () {
                                                       _vm._v(" "),
                                                       _c("option", [
                                                         _vm._v("Fantastique"),
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c("option", [
+                                                        _vm._v("Romantique"),
                                                       ]),
                                                     ]
                                                   ),

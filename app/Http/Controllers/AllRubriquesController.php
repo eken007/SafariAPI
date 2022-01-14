@@ -18,6 +18,17 @@ class AllRubriquesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function index()
+    {                                
+        $films = Video::where('rubrique', 'film')->orderBy('created_at','DESC')->take(20)->get();
+        $series = Video::where('rubrique', 'serie')->orderBy('created_at','DESC')->take(20)->get();
+        $novelas = Video::where('rubrique', 'novelas')->orderBy('created_at','DESC')->take(20)->get();
+        $webserie = Video::where('rubrique', 'web serie')->orderBy('created_at','DESC')->take(20)->get();
+
+        return response()->json([$films, $series,$novelas, $webserie]);
+    }
+
     public function search()
     {                                
         return $this->refresh();

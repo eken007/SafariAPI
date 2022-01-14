@@ -20,8 +20,7 @@ class SerieController extends Controller
      */
     public function index()
     {
-        $series = Video::where('rubrique', 'serie')->orderBy('created_at','DESC')->take(20)->get();
-        return response()->json($series);
+        
     }
 
     public function allSeries(){

@@ -51,7 +51,7 @@
                                         <form @submit.prevent="addEpisode" class=" space-y-6">
                                             <div class="w-full h-full mt-4 space-y-3">
                                                 <select  v-model="form.nom"  class="border w-full h-full bg-white text-black py-2 px-3 text-grey-800">
-                                                    <option  value="">Choisissez une saison</option>
+                                                    <option  value="">Choisissez un épisode</option>
                                                     <option v-for="saison in 100" :key="saison">Episode {{saison}}</option>
                                                 </select>
                                                 <div>
